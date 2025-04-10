@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.276a94e2.css",
+    "main.js": "/static/js/main.e1ef239c.js",
+    "static/js/453.419a5d54.chunk.js": "/static/js/453.419a5d54.chunk.js",
+    "static/media/fondo6.jpg": "/static/media/fondo6.94448da0b6ef96e8c414.jpg",
+    "static/media/foto3.png": "/static/media/foto3.3af04a6090eefa1d80e6.png",
+    "static/media/pelusa.jpg": "/static/media/pelusa.ae0d56b5b1dcccef8134.jpg",
+    "static/media/logo1.svg": "/static/media/logo1.9ab67a9377799b41edcc80acf28be243.svg",
+    "index.html": "/index.html",
+    "main.276a94e2.css.map": "/static/css/main.276a94e2.css.map",
+    "main.e1ef239c.js.map": "/static/js/main.e1ef239c.js.map",
+    "453.419a5d54.chunk.js.map": "/static/js/453.419a5d54.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.276a94e2.css",
+    "static/js/main.e1ef239c.js"
+  ]
+}

@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  patitas_app_front:
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+    container_name: patitas-front
+
+  patitas_app_back:
+    build: ./server
+    command: npm run dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+    container_name: patitas-back
+
+  patitas_db:
+    image: mysql:8.0.37
+    ports:
+      - "3307:3306"
+    container_name: patitas-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+    volumes:
+      - patitas-data:/var/lib/mysql
+
+volumes:
+  patitas-data:
