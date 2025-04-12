@@ -35,13 +35,9 @@ export const getCards = async (req, res) => {
         };
 
         //verifica si hay menos de 3 registros para deplegralos correctamente en caso positivo
-        let cartasADesplegar = 3
-        if (ultimoRegistro < 3){
-            cartasADesplegar = ultimoRegistro;
-            const listaAnimales = await getListaAnimales(cartasADesplegar);
-        } else {
-            const listaAnimales = [];
-        }
+        const listaAnimales = await getListaAnimales(3);
+
+        console.log(listaAnimales)
 
         res.json(listaAnimales)
 
