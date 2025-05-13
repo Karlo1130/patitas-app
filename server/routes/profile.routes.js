@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateToken } from '../middlewares/authMiddleware.js';
+import { validateToken, authorizeRoles} from '../middlewares/authMiddleware.js';
 import { 
     PostNewPet,
     PostNewVeterinarian,
@@ -23,13 +23,13 @@ router.delete('/profile/deletePet', validateToken, deletePet)
 
 
 //rutas de veterinaria
-router.get('/api/profile/:id_veterinarian', validateToken, getVetProfileData)
+router.get('/api/profile/:id_veterinarian', validateToken, authorizeRoles(1), getVetProfileData)
 
-router.post('/vet/profile/:id_usuario', validateToken, PostNewVeterinarian)
+router.post('/vet/profile/:id_usuario', validateToken, authorizeRoles(1), PostNewVeterinarian)
 
-router.put('/vet/profile/:id_usuario', validateToken, putVetProfile)
+router.put('/vet/profile/:id_usuario', validateToken, authorizeRoles(1), putVetProfile)
 
-router.delete('/vet/profile/deleteVet', validateToken, deleteVeterinarian)
+router.delete('/vet/profile/deleteVet', validateToken, authorizeRoles(1), deleteVeterinarian)
 
 
 export default router;

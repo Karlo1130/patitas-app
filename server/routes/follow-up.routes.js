@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateToken } from "../middlewares/authMiddleware.js";
+import { validateToken, authorizeRoles } from "../middlewares/authMiddleware.js";
 
 import { 
     getRequest,
@@ -14,8 +14,8 @@ const router = Router();
 router.get('/api/follow-up', validateToken, getRequest)
 
 //veterinarias
-router.get('/api/vet/follow-up/:id_usuario', validateToken, getVaccinationRequests)
-router.get('/api/vet/veterinarian/:id_usuario', validateToken, getVeterinarians)
-router.put('/vet/follow-up/update', validateToken, putVaccinationRequests)
+router.get('/api/vet/follow-up/:id_usuario', validateToken, authorizeRoles(1), getVaccinationRequests)
+router.get('/api/vet/veterinarian/:id_usuario', validateToken, authorizeRoles(1), getVeterinarians)
+router.put('/vet/follow-up/update', validateToken, authorizeRoles(1), putVaccinationRequests)
 
 export default router;

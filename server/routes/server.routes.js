@@ -6,7 +6,8 @@ const router = express.Router();
 router.get("/api", async (req,res)=>{
     const [result] = await pool.query('SELECT * FROM Tipo_usuario')
     console.log(result);
-    res.json({"users":["userOne", "userTwo", "useThree"]})
+    res.json(result);
+    //res.json({"users":["userOne", "userTwo", "useThree"]})
 });
 
 
