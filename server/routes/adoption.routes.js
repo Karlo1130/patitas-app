@@ -7,20 +7,13 @@ import {
  getSpecies
 } from '../controllers/adoption.controller.js';
 import { validateToken } from '../middlewares/authMiddleware.js';
-import { createRequire } from "module";
+import { upload } from '../db.js';
 
 const router = Router();
-
-
-const require = createRequire(import.meta.url);
-const multer = require('multer')
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 router.get('/api/adoption', validateToken, getAllAdoptions);
 router.get('/api/species', validateToken, getSpecies);
 router.post('/adoption', validateToken, postAdoption);
-router.post('/adoption/newAnimal', upload.single('imagen'), validateToken, PostNewAnimal);
+router.post('/adoption/newAnimal', upload.single('file'), validateToken, PostNewAnimal);
 
 export default router;

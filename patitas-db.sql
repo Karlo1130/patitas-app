@@ -21,6 +21,8 @@ CREATE TABLE usuario(
     ubicacion TEXT,
     sexo VARCHAR(1),
     sobre_mi TEXT,
+    foto_animal LONGBLOB,
+    tipo_imagen VARCHAR(50),
     
     FOREIGN KEY (id_tipo_usuario) REFERENCES Tipo_usuario(id_tipo)
 );
@@ -62,6 +64,7 @@ CREATE TABLE animal(
     descripcion TEXT NOT NULL,
     cartilla VARCHAR(50),
     foto_animal LONGBLOB,
+    tipo_imagen VARCHAR(50),
     disponible_para_adopcion BOOL NOT NULL,
     fecha_nacimiento DATE,
     
@@ -246,22 +249,51 @@ SELECT * FROM tipo_denuncia ORDER BY id_tipo;
 SELECT * FROM status_denuncia ORDER BY id_status;
 SELECT * FROM vacuna ORDER BY id_vacuna;
 
+-- Inserts para la tabla usuario (Veterinarias) con imágenes
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre,
+    foto_animal, tipo_imagen
+)
+VALUES (
+    1, 'vet1@clinic.com', 'vetpass1', 'Veterinaria Uno',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
--- Inserts para la tabla usuario (Veterinarias)
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre)
-VALUES (1, 'vet1@clinic.com', 'vetpass1', 'Veterinaria Uno');
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre,
+    foto_animal, tipo_imagen
+)
+VALUES (
+    1, 'vet2@clinic.com', 'vetpass2', 'Veterinaria Dos',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre)
-VALUES (1, 'vet2@clinic.com', 'vetpass2', 'Veterinaria Dos');
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre,
+    foto_animal, tipo_imagen
+)
+VALUES (
+    1, 'vet3@clinic.com', 'vetpass3', 'Veterinaria Tres',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre)
-VALUES (1, 'vet3@clinic.com', 'vetpass3', 'Veterinaria Tres');
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre,
+    foto_animal, tipo_imagen
+)
+VALUES (
+    1, 'vet4@clinic.com', 'vetpass4', 'Veterinaria Cuatro',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre)
-VALUES (1, 'vet4@clinic.com', 'vetpass4', 'Veterinaria Cuatro');
-
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre)
-VALUES (1, 'vet5@clinic.com', 'vetpass5', 'Veterinaria Cinco');
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre,
+    foto_animal, tipo_imagen
+)
+VALUES (
+    1, 'vet5@clinic.com', 'vetpass5', 'Veterinaria Cinco',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
 -- Inserts para la tabla veterinario para la primera veterinaria (id_usuario = 1)
 INSERT INTO veterinario (id_usuario, nombre, apellidos, cedula, edad)
@@ -343,32 +375,82 @@ VALUES (5, 'Angela', 'Nieves', '516171', 31);
 INSERT INTO veterinario (id_usuario, nombre, apellidos, cedula, edad)
 VALUES (5, 'Felipe', 'Duarte', '617181', 40);
 
--- CLIENTE
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre, apellidos, fecha_nacimiento, sexo) 
-VALUES (2, 'ej@co.com', '1234dadad5', 'Nomb', 'apell', '2003-09-10', 'M');
+-- Inserts para clientes con imágenes
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre, apellidos, 
+    fecha_nacimiento, sexo, foto_animal, tipo_imagen
+) 
+VALUES (
+    2, 'ej@co.com', '1234dadad5', 'Nomb', 'apell', 
+    '2003-09-10', 'M',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre, apellidos, fecha_nacimiento, sexo) 
-VALUES (2, 'ej@coda.com', '12345dadad', 'Nomb', 'apell', '2003-09-10', 'M');
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre, apellidos, 
+    fecha_nacimiento, sexo, foto_animal, tipo_imagen
+) 
+VALUES (
+    2, 'ej@coda.com', '12345dadad', 'Nomb', 'apell', 
+    '2003-09-10', 'M',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
-INSERT INTO usuario (id_tipo_usuario, correo_electronico, contraseña, nombre, apellidos, fecha_nacimiento, sexo) 
-VALUES (2, 'ej@cods.com', '123456789', 'Nomba', 'apells', '2003-09-10', 'M');
+INSERT INTO usuario (
+    id_tipo_usuario, correo_electronico, contraseña, nombre, apellidos, 
+    fecha_nacimiento, sexo, foto_animal, tipo_imagen
+) 
+VALUES (
+    2, 'ej@cods.com', '123456789', 'Nomba', 'apells', 
+    '2003-09-10', 'M',
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg'
+);
 
 SELECT * FROM usuario ORDER BY id_usuario;	
 
-INSERT INTO animal (id_status_animal, nombre, id_especie, raza, sexo, edad, peso, descripcion, cartilla, foto_animal, disponible_para_adopcion, fecha_nacimiento)
-VALUES (1, 'Pelusa', 2, 'Siamés', 'M', 3, 5, 'Pelusa es un gato cariñoso y juguetón.', 'Cartilla de vacunación al día', LOAD_FILE('/var/lib/mysql-files/alan.png'), TRUE, '2020-04-15');
+-- Insertar un gato llamado Pelusa
+INSERT INTO animal (
+    id_status_animal, nombre, id_especie, raza, sexo, edad, peso, 
+    descripcion, cartilla, foto_animal, tipo_imagen, disponible_para_adopcion, fecha_nacimiento
+)
+VALUES (
+    1, 'Pelusa', 2, 'Siamés', 'M', 3, 5, 
+    'Pelusa es un gato cariñoso y juguetón.', 'Cartilla de vacunación al día', 
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg', TRUE, '2020-04-15'
+);
 
 -- Insertar un perro llamado Max
-INSERT INTO animal (id_status_animal, nombre, id_especie, raza, sexo, edad, peso, descripcion, cartilla, foto_animal, disponible_para_adopcion, fecha_nacimiento)
-VALUES (2, 'Max', 1, 'Labrador Retriever', 'M', 2, 25, 'Max es un perro muy activo y le encanta jugar al aire libre.', 'Cartilla de vacunación pendiente', LOAD_FILE('/var/lib/mysql-files/alan.png'), TRUE, '2019-09-10');
+INSERT INTO animal (
+    id_status_animal, nombre, id_especie, raza, sexo, edad, peso, 
+    descripcion, cartilla, foto_animal, tipo_imagen, disponible_para_adopcion, fecha_nacimiento
+)
+VALUES (
+    2, 'Max', 1, 'Labrador Retriever', 'M', 2, 25, 
+    'Max es un perro muy activo y le encanta jugar al aire libre.', 'Cartilla de vacunación pendiente', 
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg', TRUE, '2019-09-10'
+);
 
 -- Insertar un gato llamado Luna
-INSERT INTO animal (id_status_animal, nombre, id_especie, raza, sexo, edad, peso, descripcion, cartilla, foto_animal, disponible_para_adopcion, fecha_nacimiento)
-VALUES (3, 'Luna', 2, 'Persa', 'F', 4, 7, 'Luna es una gata tranquila y amorosa que disfruta pasar tiempo en el regazo de su dueño.', 'Cartilla de vacunación al día', LOAD_FILE('/var/lib/mysql-files/alan.png'), TRUE, '2018-12-03');
+INSERT INTO animal (
+    id_status_animal, nombre, id_especie, raza, sexo, edad, peso, 
+    descripcion, cartilla, foto_animal, tipo_imagen, disponible_para_adopcion, fecha_nacimiento
+)
+VALUES (
+    2, 'Luna', 2, 'Persa', 'F', 4, 7, 
+    'Luna es una gata tranquila y amorosa que disfruta pasar tiempo en el regazo de su dueño.', 'Cartilla de vacunación al día', 
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg', TRUE, '2018-12-03'
+);
 
 -- Insertar un conejo llamado Pancho
-INSERT INTO animal (id_status_animal, nombre, id_especie, raza, sexo, edad, peso, descripcion, cartilla, foto_animal, disponible_para_adopcion, fecha_nacimiento)
-VALUES (1, 'Pancho', 5, 'Holandés', 'M', 1, 3, 'Pancho es un conejo juguetón y curioso que se lleva bien con otros animales.', 'Cartilla de vacunación al día', LOAD_FILE('/var/lib/mysql-files/alan.png'), FALSE, '2023-02-28');
+INSERT INTO animal (
+    id_status_animal, nombre, id_especie, raza, sexo, edad, peso, 
+    descripcion, cartilla, foto_animal, tipo_imagen, disponible_para_adopcion, fecha_nacimiento
+)
+VALUES (
+    1, 'Pancho', 5, 'Holandés', 'M', 1, 3, 
+    'Pancho es un conejo juguetón y curioso que se lleva bien con otros animales.', 'Cartilla de vacunación al día', 
+    LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/hoid.jpg'), 'image/jpeg', FALSE, '2023-02-28'
+);
 
 SELECT * FROM animal ORDER BY id_animal;
 
@@ -384,8 +466,9 @@ SELECT * FROM seguimiento ORDER BY id_seguimiento;
 
 SELECT * FROM mascota ORDER BY id_mascota;
 
-SHOW VARIABLES LIKE "secure_file_priv";
 
 INSERT INTO mascota (id_usuario, id_animal) 
 VALUES (8, 1);
  
+SELECT * FROM animal;
+SHOW VARIABLES LIKE 'secure_file_priv';

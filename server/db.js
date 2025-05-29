@@ -1,7 +1,10 @@
 import { createPool } from 'mysql2/promise';
 import { config } from 'dotenv';
+import multer from 'multer'
 
 config();
+
+export const upload = multer({ storage: multer.memoryStorage() })
 
 export const pool = createPool({
     host: process.env.DB_HOST,
