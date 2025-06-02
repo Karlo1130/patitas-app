@@ -384,7 +384,6 @@ SELECT * FROM seguimiento ORDER BY id_seguimiento;
 
 SELECT * FROM mascota ORDER BY id_mascota;
 
---USE patitas_db;
 
 SHOW VARIABLES LIKE "secure_file_priv";
 

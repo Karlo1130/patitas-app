@@ -23,7 +23,7 @@ const NavBar = () => {
     const navStyle = {
         backgroundColor: '#479F76',
         width: '100vw',
-        padding: '10px 10vw',
+        padding: '10px 3vw',
     };
 
     const containerStyle = {
