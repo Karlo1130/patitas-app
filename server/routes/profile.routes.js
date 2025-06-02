@@ -8,7 +8,8 @@ import {
     getVetProfileData,
     putVetProfile,
     putProfile,
-    deleteVeterinarian
+    deleteVeterinarian,
+    putPetInAdoption
 } from "../controllers/profile.controller.js";
 import { upload } from '../db.js';
 
@@ -18,6 +19,7 @@ router.get('/api/profile/:id_usuario', validateToken, getProfileData)
 
 router.post('/profile/:id_usuario', upload.single('file'), validateToken, PostNewPet)
 
+router.put('/profile/putPetInAdoption/:id_usuario', validateToken, putPetInAdoption)
 router.put('/profile/:id_usuario', upload.single('file'), validateToken, putProfile)
 
 router.delete('/profile/deletePet', validateToken, deletePet)

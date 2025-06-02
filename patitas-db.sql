@@ -89,11 +89,8 @@ CREATE TABLE adopcion(
 -- tabla creada para manejar las consultas select de mascotas
 CREATE TABLE mascota(
 	id_mascota INT PRIMARY KEY AUTO_INCREMENT,
-    id_usuario INT NOT NULL,
-    id_animal INT NOT NULL,
-    
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_animal) REFERENCES animal(id_animal)
+    id_usuario INT,
+    id_animal INT
 );
 
 CREATE TABLE vacuna(
