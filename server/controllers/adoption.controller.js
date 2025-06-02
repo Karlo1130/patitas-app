@@ -90,7 +90,8 @@ export const PostNewAnimal = async (req, res) => {
    descripcion
   } = req.body;
 
-  const imagen = req.file ? req.file.buffer : null;
+  const foto_animal = req.file ? req.file.buffer : null;
+  const tipo_imagen = req.file ? req.file.mimetype : null;
 
   if (
    !nombre ||
@@ -130,9 +131,9 @@ export const PostNewAnimal = async (req, res) => {
    await pool.query(
     `INSERT INTO animal
                  (id_status_animal, nombre, id_especie, raza, sexo, edad, peso,
-                 descripcion,foto_animal, disponible_para_adopcion, 
+                 descripcion, foto_animal, tipo_imagen, disponible_para_adopcion, 
                  fecha_nacimiento)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
      1,
      nombre,
@@ -142,7 +143,8 @@ export const PostNewAnimal = async (req, res) => {
      edad,
      peso,
      descripcion,
-     imagen,
+     foto_animal,
+     tipo_imagen,
      true,
      fecha_nacimiento,
     ]

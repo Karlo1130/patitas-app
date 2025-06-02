@@ -176,6 +176,9 @@ export const PostNewPet = async (req, res) => {
             peso,
             descripcion,
         } = req.body;
+        
+        const foto_animal = req.file ? req.file.buffer : null;
+        const tipo_imagen = req.file ? req.file.mimetype : null;
 
         if (!nombre || 
             !id_especie || 
@@ -183,7 +186,7 @@ export const PostNewPet = async (req, res) => {
             !sexo || 
             !descripcion
         ) {
-            return res.status(400).send('Todos los campos deben estar llenos');
+            return res.status(400).send('Todos los campos deben de estar llenos');
         }
 
         const validateResult = validateDataNewPet(nombre, id_especie, raza, fecha_nacimiento, edad, sexo, peso, descripcion);
@@ -197,10 +200,10 @@ export const PostNewPet = async (req, res) => {
             const [result] = await pool.query(
                 `INSERT INTO animal
                  (id_status_animal, nombre, id_especie, raza, sexo, edad, peso,
-                 descripcion, disponible_para_adopcion, 
+                 descripcion, foto_animal, tipo_imagen, disponible_para_adopcion, 
                  fecha_nacimiento)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                [1, nombre, id_especie, raza, sexo, edad, peso, descripcion, false, fecha_nacimiento],
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [1, nombre, id_especie, raza, sexo, edad, peso, descripcion, foto_animal, tipo_imagen, false, fecha_nacimiento],
             );
 
             id_animal = result.insertId;
@@ -227,7 +230,7 @@ export const PostNewPet = async (req, res) => {
                 [id_usuario, id_animal],
             );
 
-            res.status(201).send('Animal registrado correctamente');
+            res.status(201).send('Mascota registrada correctamente');
         } catch (error) {
             console.error('Error al registrar la relación animal - cliente o el historial de adopción: ', error);
             return res.status(500).send('Ha ocurrido un error');
@@ -389,6 +392,32 @@ export const putVetProfile = async (req, res) => {
         res.status(500).send('Ha ocurrido un error')
     }
 
+}
+
+export const putPetInAdoption = async (req, res) => {
+
+    const {id_usuario} = req.params;
+
+    const { id_animal } = req.body
+
+     try {
+        // Actualizar el animal para que esté disponible para adopción
+        await pool.query(
+            "UPDATE animal SET disponible_para_adopcion = TRUE WHERE id_animal = ?",
+            [id_animal]
+        );
+
+        await pool.query(
+            "UPDATE mascota SET id_usuario = NULL, id_animal = NULL WHERE id_animal = ? AND id_usuario = ?",
+            [id_animal, id_usuario]
+        );
+
+        res.status(200).json({ message: "La mascota ahora está disponible para adopción." });
+
+    } catch (error) {
+        console.error("Error al poner mascota en adopción:", error);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
 }
 
 //elimina la mascota y la relacion mascota-cliente en la tabla Mascota
